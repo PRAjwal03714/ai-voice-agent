@@ -195,10 +195,9 @@ ai-voice-agent/
 
 ## 👤 Author
 
-**Prajwal V**
+**Prajwal Venugopal**
 
-- GitHub: [@prajwalv03](https://github.com/prajwalv03)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
+- LinkedIn: (https://www.linkedin.com/in/prajwalvenugopal/)
 
 ---
 
