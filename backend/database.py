@@ -6,14 +6,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import os
-from dotenv import load_dotenv
 
-# Load .env file (won't override existing env vars from Docker)
-# load_dotenv()  # Disabled for Docker
-
-# Get database URL from environment (Docker Compose will set this)
+# Get database URL from environment (Docker Compose sets this)
+# Default to localhost for local development
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:132506@localhost:5432/vanessa_ai")
-
 
 # Create database engine
 engine = create_engine(DATABASE_URL)
