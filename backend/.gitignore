@@ -1,10 +1,35 @@
-# Environment variables (secret keys)
-.env
 
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 venv/
+env/
+ENV/
+
+# Environment
+.env
+*.env
+
+# ChromaDB
+chroma_data/
+
+# Model files (too large)
+models/
+*.bin
+*.safetensors
+intent_model_checkpoints/
+logs/
+
+# Database
+*.db
+*.sqlite
+
+# IDE
+.vscode/
+.idea/
+*.swp
 
 # OS
 .DS_Store
+Thumbs.db
