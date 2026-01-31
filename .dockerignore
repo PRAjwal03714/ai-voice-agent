@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Models and data (HUGE - don't copy to Docker)
+backend/models/
+backend/*.pkl
+backend/*.joblib
+backend/*.h5
+backend/*.pt
+backend/*.pth
+backend/model_training/
+
+# ChromaDB cache (downloads at runtime)
+backend/.chroma/
+backend/chroma_data/
+
+# Development files
+.git/
+.gitignore
+.env
+.env.*
+*.log
+.DS_Store
+.vscode/
+.idea/
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+frontend/.env
+
+# Documentation
+README.md
+*.md
+docs/
+
+# Tests
+backend/tests/
+*.test.py
