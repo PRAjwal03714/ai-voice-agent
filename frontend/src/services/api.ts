@@ -3,8 +3,10 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://vanessa-ai-backen
 
 // Types
 export interface CallLog {
+  id?: string;  // Added id field
   call_sid: string;
-  phone_number: string;
+  phone_number?: string;
+  phone?: string;  // Alternative field name
   intent?: string;
   price_mentioned?: number;
   timeline_mentioned?: string;
