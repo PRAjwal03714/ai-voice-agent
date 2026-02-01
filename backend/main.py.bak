@@ -44,7 +44,7 @@ active_conversations = {}
 async def startup_event():
     """Load ML model when server starts"""
     print("🚀 Starting up Vanessa AI...")
-    #load_intent_classifier()  # Removed - using OpenAI now
+    load_intent_classifier()
     print("✅ Startup complete!")
 
 

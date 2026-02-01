@@ -1,4 +1,3 @@
-from vector_store_simple import search_properties
 from fastapi import FastAPI, Form
 from fastapi.responses import Response
 from langchain_openai import ChatOpenAI
@@ -12,7 +11,7 @@ from rag_system import get_property_context
 from database import save_call_data
 from mongodb import save_transcript_to_mongo, get_recent_transcripts, get_transcript_by_call_sid
 from lead_database import get_property_for_phone
-from intent_classifier_openai import classify_intent  #  load_intent_classifier, get_intent_from_conversation
+from intent_classifier import load_intent_classifier, get_intent_from_conversation
 
 load_dotenv()
 
@@ -44,7 +43,7 @@ active_conversations = {}
 async def startup_event():
     """Load ML model when server starts"""
     print("🚀 Starting up Vanessa AI...")
-    #load_intent_classifier()  # Removed - using OpenAI now
+    load_intent_classifier()
     print("✅ Startup complete!")
 
 

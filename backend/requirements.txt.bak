@@ -17,8 +17,7 @@ pymongo<4.10
 motor==3.6.0
 
 # Vector DB (Pinecone - cloud-hosted)
-pinecone-client==5.0.1
+pinecone-client==3.0.0
 
 # Lightweight ML (if needed)
 scikit-learn==1.5.2
-langchain-pinecone==0.1.3
