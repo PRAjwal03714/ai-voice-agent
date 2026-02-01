@@ -53,25 +53,21 @@ export const Dashboard: React.FC = () => {
             title="Total Calls"
             value={stats.totalCalls}
             icon={<Phone className="w-6 h-6" />}
-            color="blue"
           />
           <StatsCard
             title="Qualified Leads"
             value={stats.qualified}
             icon={<Target className="w-6 h-6" />}
-            color="green"
           />
           <StatsCard
             title="Avg Duration"
             value={`${Math.floor(stats.avgDuration / 60)}:${Math.floor(stats.avgDuration % 60).toString().padStart(2, '0')}`}
             icon={<Clock className="w-6 h-6" />}
-            color="purple"
           />
           <StatsCard
             title="Active Calls"
             value={activeCalls?.length || 0}
             icon={<TrendingUp className="w-6 h-6" />}
-            color="orange"
           />
         </div>
 
