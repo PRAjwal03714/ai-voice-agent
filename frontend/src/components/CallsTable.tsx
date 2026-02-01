@@ -6,14 +6,16 @@ interface CallsTableProps {
 }
 
 export const CallsTable: React.FC<CallsTableProps> = ({ calls }) => {
-  const getIntentBadge = (intent: string) => {
+  const getIntentBadge = (intent?: string) => {  // Made intent optional
+    if (!intent) return <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Unknown</span>;
+    
     const colors: { [key: string]: string } = {
       QUALIFIED: 'bg-blue-100 text-blue-800',
       INTERESTED: 'bg-green-100 text-green-800',
       NOT_INTERESTED: 'bg-red-100 text-red-800',
       EXPLORING: 'bg-yellow-100 text-yellow-800',
     };
-
+    
     return (
       <span className={`px-2 py-1 rounded-full text-xs font-medium ${colors[intent] || 'bg-gray-100 text-gray-800'}`}>
         {intent}
@@ -21,7 +23,8 @@ export const CallsTable: React.FC<CallsTableProps> = ({ calls }) => {
     );
   };
 
-  const formatDuration = (seconds: number) => {
+  const formatDuration = (seconds?: number) => {  // Made optional
+    if (!seconds) return '0:00';
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -52,9 +55,10 @@ export const CallsTable: React.FC<CallsTableProps> = ({ calls }) => {
           <tbody className="bg-white divide-y divide-gray-200">
             {calls.map((call) => (
               <tr key={call.call_sid || call.id} className="hover:bg-gray-50">
-<td className="px-6 py-4 text-sm font-medium text-gray-900">
-  {call.phone_number || call.phone || 'Unknown'}
-</td>                <td className="px-6 py-4">{getIntentBadge(call.intent)}</td>
+                <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                  {call.phone_number || call.phone || 'Unknown'}
+                </td>
+                <td className="px-6 py-4">{getIntentBadge(call.intent)}</td>
                 <td className="px-6 py-4 text-sm text-gray-500">{call.price_mentioned || '-'}</td>
                 <td className="px-6 py-4 text-sm text-gray-500">{call.timeline_mentioned || '-'}</td>
                 <td className="px-6 py-4 text-sm text-gray-500">{formatDuration(call.call_duration)}</td>
