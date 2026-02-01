@@ -21,16 +21,17 @@ export const Dashboard: React.FC = () => {
 
   const stats = React.useMemo(() => {
     if (!calls) return null;
-
+    
     const totalCalls = calls.length;
     const qualified = calls.filter(c => c.intent === 'QUALIFIED').length;
     const avgDuration = calls.reduce((sum, c) => sum + (c.call_duration || 0), 0) / totalCalls;
-
+    
     const intentDist: { [key: string]: number } = {};
     calls.forEach(call => {
-      intentDist[call.intent || "Unknown"] = (intentDist[call.intent] || 0) + 1;
+      const intent = call.intent || "Unknown";
+      intentDist[intent] = (intentDist[intent] || 0) + 1;
     });
-
+    
     return { totalCalls, qualified, avgDuration, intentDist };
   }, [calls]);
 
@@ -43,41 +44,46 @@ export const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <h1 className="text-3xl font-bold text-gray-900">🏡 Vanessa AI Dashboard</h1>
-          <p className="text-sm text-gray-600 mt-1">Real-time analytics</p>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Vanessa AI Dashboard</h1>
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <StatsCard title="Total Calls" value={stats.totalCalls} icon={<Phone size={32} />} />
-          <StatsCard 
-            title="Qualified Leads" 
-            value={stats.qualified} 
-            subtitle={`${((stats.qualified / stats.totalCalls) * 100).toFixed(1)}%`}
-            icon={<Target size={32} />} 
+          <StatsCard
+            title="Total Calls"
+            value={stats.totalCalls}
+            icon={<Phone className="w-6 h-6" />}
+            color="blue"
           />
-          <StatsCard 
-            title="Avg Duration" 
-            value={`${Math.floor(stats.avgDuration)}s`} 
-            icon={<Clock size={32} />} 
+          <StatsCard
+            title="Qualified Leads"
+            value={stats.qualified}
+            icon={<Target className="w-6 h-6" />}
+            color="green"
           />
-          <StatsCard 
-            title="Active Calls" 
-            value={activeCalls?.count || 0} 
-            icon={<TrendingUp size={32} />} 
+          <StatsCard
+            title="Avg Duration"
+            value={`${Math.floor(stats.avgDuration / 60)}:${Math.floor(stats.avgDuration % 60).toString().padStart(2, '0')}`}
+            icon={<Clock className="w-6 h-6" />}
+            color="purple"
+          />
+          <StatsCard
+            title="Active Calls"
+            value={activeCalls?.length || 0}
+            icon={<TrendingUp className="w-6 h-6" />}
+            color="orange"
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <IntentPieChart data={stats.intentDist} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <div className="lg:col-span-1">
+            <IntentPieChart data={stats.intentDist} />
+          </div>
+          <div className="lg:col-span-2">
+            <CallsTable calls={calls} />
+          </div>
         </div>
-
-        <CallsTable calls={calls || []} />
-      </main>
+      </div>
     </div>
   );
 };
