@@ -24,11 +24,11 @@ export const Dashboard: React.FC = () => {
 
     const totalCalls = calls.length;
     const qualified = calls.filter(c => c.intent === 'QUALIFIED').length;
-    const avgDuration = calls.reduce((sum, c) => sum + c.call_duration, 0) / totalCalls;
+    const avgDuration = calls.reduce((sum, c) => sum + (c.call_duration || 0), 0) / totalCalls;
 
     const intentDist: { [key: string]: number } = {};
     calls.forEach(call => {
-      intentDist[call.intent] = (intentDist[call.intent] || 0) + 1;
+      intentDist[call.intent || "Unknown"] = (intentDist[call.intent] || 0) + 1;
     });
 
     return { totalCalls, qualified, avgDuration, intentDist };
