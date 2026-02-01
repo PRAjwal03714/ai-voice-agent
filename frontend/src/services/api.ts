@@ -3,10 +3,10 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://vanessa-ai-backen
 
 // Types
 export interface CallLog {
-  id?: string;  // Added id field
+  id?: string;
   call_sid: string;
   phone_number?: string;
-  phone?: string;  // Alternative field name
+  phone?: string;
   intent?: string;
   price_mentioned?: number;
   timeline_mentioned?: string;
@@ -30,9 +30,12 @@ export const apiService = {
     return response.json();
   },
 
-  // Get recent calls
-  getRecentCalls: async (): Promise<CallLog[]> => {
-    const response = await fetch(`${API_BASE_URL}/recent-calls`);
+  // Get recent calls (with optional limit)
+  getRecentCalls: async (limit?: number): Promise<CallLog[]> => {
+    const url = limit 
+      ? `${API_BASE_URL}/recent-calls?limit=${limit}`
+      : `${API_BASE_URL}/recent-calls`;
+    const response = await fetch(url);
     if (!response.ok) throw new Error('Failed to fetch recent calls');
     return response.json();
   },
