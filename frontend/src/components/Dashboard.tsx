@@ -76,7 +76,7 @@ export const Dashboard: React.FC = () => {
             <IntentPieChart data={stats.intentDist} />
           </div>
           <div className="lg:col-span-2">
-            <CallsTable calls={calls} />
+            <CallsTable calls={calls || []} />
           </div>
         </div>
       </div>
