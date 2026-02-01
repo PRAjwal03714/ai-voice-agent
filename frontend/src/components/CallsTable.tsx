@@ -51,7 +51,7 @@ export const CallsTable: React.FC<CallsTableProps> = ({ calls }) => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {calls.map((call) => (
-              <tr key={call.id} className="hover:bg-gray-50">
+              <tr key={call.call_sid || call.id} className="hover:bg-gray-50">
 <td className="px-6 py-4 text-sm font-medium text-gray-900">
   {call.phone_number || call.phone || 'Unknown'}
 </td>                <td className="px-6 py-4">{getIntentBadge(call.intent)}</td>
