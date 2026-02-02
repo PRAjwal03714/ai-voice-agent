@@ -264,7 +264,7 @@ def should_end_call(phone_number: str, user_input: str) -> tuple[bool, dict]:
         tuple: (should_end: bool, intent_data: dict)
     """
     # Classify intent using ML model
-    intent_result = get_intent_from_conversation(phone_number, user_input)
+    intent_result = classify_intent(user_input)
     
     intent = intent_result['intent']
     
