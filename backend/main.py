@@ -230,7 +230,7 @@ async def process_speech(
     # Log intent classification
     print(f"📊 Intent: {intent_data['intent']} "
           f"(confidence: {intent_data['confidence']:.1%}, "
-          f"method: {intent_data['method']})")
+          f"(confidence: {intent_data['confidence']:.1%})")
     
     # Check if conversation should end
     if should_end or check_if_should_end(SpeechResult, ai_response):
