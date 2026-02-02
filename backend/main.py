@@ -73,7 +73,7 @@ def get_ai_response(phone_number: str, user_input: str) -> str:
         print(f"📍 Caller owns: {caller_address}")
     
     # Get property context with the caller's specific address
-    property_context = get_property_context(user_input, history, known_address=caller_address)
+    property_context = get_property_context(user_input)
     
     # Create the system prompt WITH property context
     system_message = f"""You are Vanessa, a friendly real estate acquisitions assistant calling homeowners.
