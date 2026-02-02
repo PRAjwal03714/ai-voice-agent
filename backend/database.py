@@ -32,7 +32,7 @@ class CallLog(Base):
     call_duration = Column(Integer, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-def save_call_data(call_sid, phone_number, intent, price_mentioned=None, timeline_mentioned=None, call_duration=None):
+def save_call_data(call_sid, phone_number, intent, confidence=None, price_mentioned=None, timeline_mentioned=None, call_duration=None):
     """Save call data to database"""
     db = SessionLocal()
     try:
