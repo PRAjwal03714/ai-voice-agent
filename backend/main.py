@@ -612,3 +612,6 @@ async def get_analytics_summary():
         
     finally:
         db.close()
+@app.get("/cors-test")
+async def cors_test():
+    return {"ok": True}
