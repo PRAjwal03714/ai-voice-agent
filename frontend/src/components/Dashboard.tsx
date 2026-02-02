@@ -108,9 +108,18 @@ export const Dashboard: React.FC = () => {
     isError,
   } = useQuery<CallLog[]>({
     queryKey: ['recentCalls'],
-    queryFn: () => apiService.getRecentCalls(20),
+    queryFn: async () => {
+      const res = await apiService.getRecentCalls(20);
+  
+      // 🔥 CRITICAL FIX: normalize runtime data
+      if (Array.isArray(res)) return res;
+      if (Array.isArray((res as any)?.calls)) return (res as any).calls;
+  
+      return [];
+    },
     refetchInterval: 5000,
   });
+  
 
   /* =========================
      Active Calls
