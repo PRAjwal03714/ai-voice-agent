@@ -37,7 +37,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - MONGODB_URL=mongodb://mongodb:27017/
+      - MONGODB_URL=${MONGODB_URL}
 
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - TWILIO_PHONE_NUMBER=+1(888) 501-4073
