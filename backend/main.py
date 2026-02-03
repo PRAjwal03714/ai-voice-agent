@@ -305,12 +305,22 @@ async def save_call_data(phone_number: str, call_sid: str, intent_data: dict):
     from database import save_call_data as save_to_db
     
     # Save to PostgreSQL
+    # save_to_db(
+    #     phone_number=phone_number,
+    #     call_sid=call_sid or "UNKNOWN",
+    #     intent=intent,
+    #     confidence=intent_data.get('confidence', 0.0)
+    # )
     save_to_db(
-        phone_number=phone_number,
-        call_sid=call_sid or "UNKNOWN",
-        intent=intent,
-        confidence=intent_data.get('confidence', 0.0)
-    )
+    phone_number=phone_number,
+    call_sid=call_sid or "UNKNOWN",
+    intent=intent,
+    confidence=intent_data.get('confidence', 0.0),
+    price_mentioned=price,
+    timeline_mentioned=timeline,
+    call_duration=round(duration, 2)
+)
+
     
     # Save to MongoDB (full transcript)
     await save_transcript_to_mongo(
