@@ -20,11 +20,13 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://ai-voice-agent-chi.vercel.app/"],  # Frontend URL
+    allow_origins=["http://localhost:3000"],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
-    allow_headers=["*"],  # Allow all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
 
 # Initialize database on startup
 
@@ -71,7 +73,7 @@ def get_ai_response(phone_number: str, user_input: str) -> str:
         print(f"📍 Caller owns: {caller_address}")
     
     # Get property context with the caller's specific address
-    property_context = get_property_context(user_input, history, known_address=caller_address)
+    property_context = get_property_context(user_input)
     
     # Create the system prompt WITH property context
     system_message = f"""You are Vanessa, a friendly real estate acquisitions assistant calling homeowners.
@@ -262,7 +264,7 @@ def should_end_call(phone_number: str, user_input: str) -> tuple[bool, dict]:
         tuple: (should_end: bool, intent_data: dict)
     """
     # Classify intent using ML model
-    intent_result = get_intent_from_conversation(phone_number, user_input)
+    intent_result = classify_intent(user_input)
     
     intent = intent_result['intent']
     
@@ -612,3 +614,6 @@ async def get_analytics_summary():
         
     finally:
         db.close()
+@app.get("/cors-test")
+async def cors_test():
+    return {"ok": True}
