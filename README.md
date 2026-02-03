@@ -14,6 +14,14 @@
 
 An end-to-end AI voice agent that conducts automated voice calls for real estate acquisitions. The system combines conversational AI with **custom fine-tuned transformer models** and a **Retrieval-Augmented Generation (RAG) pipeline** to provide intelligent lead qualification and context-aware property valuations.
 
+## 🔗 Live Demo & Dashboards
+
+- **Live React Dashboard (Production)**  
+  https://ai-voice-agent-six-liart.vercel.app/
+
+- **Tableau Analytics Dashboard**  
+  https://public.tableau.com/app/profile/prajwal.venugopal2102/viz/tableau_17698237207340/Dashboard1?publish=yes
+
 ### Key Features
 
 - 🎙️ **Conversational AI**: Natural voice conversations using OpenAI GPT-4 + Twilio
