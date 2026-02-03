@@ -416,37 +416,66 @@ async def get_conversation(phone_number: str):
         return {"error": "No active conversation for this number"}
 
 
-@app.get("/recent-calls")
-async def get_recent_calls():
-    """Get recent calls from database"""
-    from database import SessionLocal, CallLog
+# @app.get("/recent-calls")
+# async def get_recent_calls():
+#     """Get recent calls from database"""
+#     from database import SessionLocal, CallLog
     
+#     db = SessionLocal()
+#     try:
+#         calls = db.query(CallLog).order_by(CallLog.created_at.desc()).limit(10).all()
+        
+#         result = []
+#         for call in calls:
+#             result.append({
+#                 "id": call.id,
+#                 "phone_number": call.phone_number,  # ← Make sure this exists
+#                 "phone": call.phone_number,         # ← Add alias just in case
+#                 "intent": call.intent,
+#                 "price_mentioned": call.price_mentioned,
+#                 "price": call.price_mentioned,      # ← Add alias
+#                 "timeline_mentioned": call.timeline_mentioned,
+#                 "timeline": call.timeline_mentioned, # ← Add alias
+#                 "call_duration": call.call_duration if call.call_duration else 0,
+#                 "duration": call.call_duration if call.call_duration else 0,
+#                 "created_at": call.created_at.isoformat() if call.created_at else ""
+#             })
+        
+#         return {"calls": result, "count": len(result)}
+#     except Exception as e:
+#         print(f"❌ Error in /recent-calls: {e}")
+#         return {"calls": [], "count": 0}
+#     finally:
+#         db.close()
+
+@app.get("/recent-calls")
+async def get_recent_calls(limit: int = 10):
+    from database import SessionLocal, CallLog
+
     db = SessionLocal()
     try:
-        calls = db.query(CallLog).order_by(CallLog.created_at.desc()).limit(10).all()
-        
-        result = []
-        for call in calls:
-            result.append({
-                "id": call.id,
-                "phone_number": call.phone_number,  # ← Make sure this exists
-                "phone": call.phone_number,         # ← Add alias just in case
+        calls = (
+            db.query(CallLog)
+            .order_by(CallLog.created_at.desc())
+            .limit(limit)
+            .all()
+        )
+
+        return [
+            {
+                "call_sid": call.call_sid,
+                "phone_number": call.phone_number,
                 "intent": call.intent,
                 "price_mentioned": call.price_mentioned,
-                "price": call.price_mentioned,      # ← Add alias
                 "timeline_mentioned": call.timeline_mentioned,
-                "timeline": call.timeline_mentioned, # ← Add alias
-                "call_duration": call.call_duration if call.call_duration else 0,
-                "duration": call.call_duration if call.call_duration else 0,
-                "created_at": call.created_at.isoformat() if call.created_at else ""
-            })
-        
-        return {"calls": result, "count": len(result)}
-    except Exception as e:
-        print(f"❌ Error in /recent-calls: {e}")
-        return {"calls": [], "count": 0}
+                "call_duration": call.call_duration,
+                "created_at": call.created_at.isoformat() if call.created_at else None,
+            }
+            for call in calls
+        ]
     finally:
         db.close()
+
 
 
 @app.get("/api/stats")
