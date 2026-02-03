@@ -7,6 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import os
 from sqlalchemy import String
+from sqlalchemy import Float
 
 
 # Get database URL from environment (Docker Compose sets this)
@@ -31,7 +32,7 @@ class CallLog(Base):
     intent = Column(String)
     price_mentioned = Column(String, nullable=True)
     timeline_mentioned = Column(String, nullable=True)
-    call_duration = Column(Integer, nullable=True)
+    call_duration = Column(Float, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
 def save_call_data(call_sid, phone_number, intent, confidence=None, price_mentioned=None, timeline_mentioned=None, call_duration=None):
