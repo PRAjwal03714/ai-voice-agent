@@ -165,7 +165,7 @@ export const Dashboard: React.FC = () => {
 
     const intentDist: Record<string, number> = {};
     calls.forEach((call) => {
-      const intent = call.intent ?? 'Unknown';
+      const intent = (call.intent ?? 'unknown').toUpperCase();
       intentDist[intent] = (intentDist[intent] || 0) + 1;
     });
 

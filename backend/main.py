@@ -448,6 +448,13 @@ async def get_conversation(phone_number: str):
 #     finally:
 #         db.close()
 
+def normalize_intent(intent: str) -> str:
+    if intent == "callback":
+        return "QUALIFIED"
+    if intent:
+        return intent.upper()
+    return "EXPLORING"
+
 @app.get("/recent-calls")
 async def get_recent_calls(limit: int = 10):
     from database import SessionLocal, CallLog
@@ -462,17 +469,18 @@ async def get_recent_calls(limit: int = 10):
         )
 
         return [
-            {
-                "call_sid": call.call_sid,
-                "phone_number": call.phone_number,
-                "intent": call.intent,
-                "price_mentioned": call.price_mentioned,
-                "timeline_mentioned": call.timeline_mentioned,
-                "call_duration": call.call_duration,
-                "created_at": call.created_at.isoformat() if call.created_at else None,
-            }
-            for call in calls
-        ]
+    {
+        "call_sid": call.call_sid,
+        "phone_number": call.phone_number,
+        "intent": normalize_intent(call.intent),
+        "price_mentioned": call.price_mentioned,
+        "timeline_mentioned": call.timeline_mentioned,
+        "call_duration": call.call_duration,
+        "created_at": call.created_at.isoformat() if call.created_at else None,
+    }
+    for call in calls
+]
+
     finally:
         db.close()
 

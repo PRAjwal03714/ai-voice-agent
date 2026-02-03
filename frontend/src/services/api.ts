@@ -8,7 +8,7 @@ export interface CallLog {
   phone_number?: string;
   phone?: string;
   intent?: string;
-  price_mentioned?: number;
+  price_mentioned?: string;
   timeline_mentioned?: string;
   call_duration?: number;
   created_at: string;
