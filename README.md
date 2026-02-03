@@ -129,8 +129,7 @@ TWILIO_ACCOUNT_SID=your-sid
 TWILIO_AUTH_TOKEN=your-token
 TWILIO_PHONE_NUMBER=+1234567890
 DATABASE_URL=postgresql://user:pass@localhost/vanessa_ai
-MONGODB_URL=mongodb+srv://prajwalv03_db_user:f2Hy4uXooN5MPM5M@cluster0.kvet0rf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-
+MONGODB_URL=mongodb://localhost:27017/
 ```
 
 ---
