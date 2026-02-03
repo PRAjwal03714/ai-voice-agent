@@ -27,6 +27,16 @@ An end-to-end AI voice agent that conducts automated voice calls for real estate
 
 ---
 
+## 📸 Live System Snapshots
+
+### React Analytics Dashboard (Production)
+![Vanessa AI React Dashboard](screenshots/dashboard-react.png)
+
+### Tableau Call Analytics Dashboard
+![Vanessa AI Tableau Dashboard](screenshots/dashboard-tableau.png)
+
+> Both dashboards consume live data from the same PostgreSQL backend.
+
 ## 🏗️ Architecture
 ```
 ┌──────────────┐
@@ -312,11 +322,15 @@ vanessa-ai/
 - 97% cost reduction vs GPT-4 API
 - Fallback strategy for edge cases
 
-### Phase 4 📋 (Planned)
-- React dashboard with real-time analytics
-- A/B testing framework
-- Model monitoring and drift detection
-- Active learning for continuous improvement
+### Phase 4 ✅ (Completed)
+- React analytics dashboard for live call monitoring
+- Tableau BI dashboard for historical call analytics
+- Dockerized backend services
+- CI/CD pipeline for automated builds and deployments
+- Production hosting (Render backend, Vercel frontend)
+- Environment-based configuration (local vs production)
+- Live production data flowing from PostgreSQL
+
 
 ---
 
