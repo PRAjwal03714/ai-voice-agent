@@ -17,7 +17,7 @@ export interface CallLog {
 export interface Stats {
   total_calls: number;
   qualified_leads: number;
-  avg_call_duration: number;
+  avg_duration: number;
   intent_distribution: { [key: string]: number };
 }
 
