@@ -53,7 +53,11 @@ export const IntentPieChart: React.FC<IntentPieChartProps> = ({ data }) => {
     <div className="bg-white rounded-lg shadow-md p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">Intent Distribution</h3>
       <div style={{ height: '300px' }}>
-        <Pie data={chartData} options={options} />
+      <Pie
+  key={Object.keys(data).join('-')}
+  data={chartData}
+  options={options}
+/>
       </div>
     </div>
   );
