@@ -6,6 +6,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import os
+from sqlalchemy import String
+
 
 # Get database URL from environment (Docker Compose sets this)
 # Default to localhost for local development
@@ -27,7 +29,7 @@ class CallLog(Base):
     call_sid = Column(String, unique=True, index=True)
     phone_number = Column(String, index=True)
     intent = Column(String)
-    price_mentioned = Column(Float, nullable=True)
+    price_mentioned = Column(String, nullable=True)
     timeline_mentioned = Column(String, nullable=True)
     call_duration = Column(Integer, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
